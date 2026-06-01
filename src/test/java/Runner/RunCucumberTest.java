@@ -1,5 +1,4 @@
-package StepDefinition;
-
+package Runner;
 
 import io.cucumber.junit.Cucumber;
 
@@ -14,9 +13,7 @@ glue= {"StepDefinition","Hooks"},
 tags="@Smoke",
 plugin= {"pretty","html:target/htmlreports/report1.html","json:target/jsonreport/report","junit:target/junitreport/report"}
 )
-public class TestRunner {
-	
-	
+
+public class RunCucumberTest {
 
 }
-
