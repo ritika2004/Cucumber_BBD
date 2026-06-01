@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.JavascriptExecutor;
 
 public class Page {
 
@@ -66,13 +67,21 @@ public class Page {
 
     public void MyAccount() {
 
-    	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
-        WebElement myAcc = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(
-                        By.xpath("//span[contains(text(),'My Account')]")));
+        WebElement myAccount = wait.until(
+                ExpectedConditions.elementToBeClickable(
+                        By.xpath("//span[text()='My Account']")
+                ));
 
-        myAcc.click();
+        ((JavascriptExecutor) driver).executeScript(
+                "arguments[0].scrollIntoView(true);",
+                myAccount);
+
+        wait.until(ExpectedConditions.elementToBeClickable(myAccount));
+
+        myAccount.click();
+
         System.out.println("My Account Clicked");
     }
 
