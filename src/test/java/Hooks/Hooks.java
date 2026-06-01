@@ -22,8 +22,8 @@ public class Hooks {
         driver.manage().timeouts()
         .implicitlyWait(Duration.ofSeconds(10));
 
-//        driver.get("https://tutorialsninja.com/demo/");
-        driver.get("https://phptravels.net/login");
+        driver.get("https://tutorialsninja.com/demo/");
+//        driver.get("https://phptravels.net/login");
 
         System.out.println("Browser Opened");
     }
