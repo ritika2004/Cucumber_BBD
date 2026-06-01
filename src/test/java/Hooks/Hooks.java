@@ -4,6 +4,7 @@ package Hooks;
 import java.time.Duration;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -15,18 +16,22 @@ public class Hooks {
     @Before
     public void setup() {
 
-        driver = new ChromeDriver();
+    
 
-        driver.manage().window().maximize();
-        
-        driver.manage().timeouts()
-        .implicitlyWait(Duration.ofSeconds(10));
+    	    ChromeOptions options = new ChromeOptions();
 
-        driver.get("https://tutorialsninja.com/demo/");
-//        driver.get("https://phptravels.net/login");
+    	    options.addArguments("--remote-allow-origins=*");
 
-        System.out.println("Browser Opened");
-    }
+    	    driver = new ChromeDriver(options);
+
+    	    driver.manage().window().maximize();
+
+    	    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+    	    driver.get("https://tutorialsninja.com/demo/");
+
+    	    System.out.println("Browser Opened");
+    	}    
 
     @After
     public void tearDown() {

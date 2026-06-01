@@ -8,12 +8,14 @@ import io.cucumber.java.en.*;
 
 public class NinjaFlowTest {
 
-    WebDriver driver = Hooks.driver;
-
-    Page p = new Page(Hooks.driver);
+    WebDriver driver;
+    Page p;
 
     @Given("user open TutorialsNinja homepage")
     public void user_open_tutorialsninja_homepage() {
+
+        driver = Hooks.driver;
+        p = new Page(driver);
 
         System.out.println("Homepage Opened");
     }
@@ -22,7 +24,6 @@ public class NinjaFlowTest {
     public void user_open_tutorialsninja_registration_page() {
 
         p.MyAccount();
-
         p.Register();
 
         System.out.println("Registration Page Opened");
@@ -71,26 +72,30 @@ public class NinjaFlowTest {
     }
 
     @And("user click on continue button")
-    public void user_click_on_continue_button() throws InterruptedException {
+    public void user_click_on_continue_button() {
 
         p.Continue();
 
-        Thread.sleep(3000);
+        System.out.println("Title : " + driver.getTitle());
+        System.out.println("URL : " + driver.getCurrentUrl());
+
+        if(driver.getCurrentUrl().contains("success")) {
+
+            System.out.println("Registration Successful");
+        }
+        else {
+
+            System.out.println("Registration Failed");
+        }
     }
 
     @And("user logout after registration")
-    public void user_logout_after_registration() throws InterruptedException {
+    public void user_logout_after_registration() {
 
-    	p.MyAccount();
-
-        Thread.sleep(2000);
-
+        p.MyAccount();
         p.Logout();
 
-        System.out.println("Logout Passed");
-
-        Thread.sleep(3000);
-    
+        System.out.println("Registration Logout Passed");
     }
 
     @And("user open login page")
@@ -112,61 +117,48 @@ public class NinjaFlowTest {
     }
 
     @And("user click on login button")
-    public void user_click_on_login_button() throws InterruptedException {
+    public void user_click_on_login_button() {
 
         p.Login();
-
-        Thread.sleep(3000);
     }
 
     @And("^user search product (.*)$")
     public void user_search_product(String productname) {
 
-        p.searchProduct(productname);
+        p.SearchProduct(productname);
     }
 
     @And("user click on search button")
-    public void user_click_on_search_button() throws InterruptedException {
+    public void user_click_on_search_button() {
 
         p.SearchButton();
-
-        Thread.sleep(3000);
     }
 
     @And("^user click on searched product (.*)$")
-    public void user_click_on_searched_product(String productname)throws InterruptedException {
+    public void user_click_on_searched_product(String productname) {
 
         p.SearchedProduct(productname);
-
-        Thread.sleep(3000);
     }
 
     @And("user click on add to cart button")
-    public void user_click_on_add_to_cart_button()
-            throws InterruptedException {
+    public void user_click_on_add_to_cart_button() {
 
         p.AddToCart();
-
-        Thread.sleep(3000);
     }
 
     @And("user click on shopping cart")
-    public void user_click_on_shopping_cart()
-            throws InterruptedException {
+    public void user_click_on_shopping_cart() {
 
         p.ShoppingCart();
-
-        Thread.sleep(3000);
     }
 
     @And("user click on checkout button")
     public void user_click_on_checkout_button() {
 
         try {
-
             p.Checkout();
-
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
 
             System.out.println("Checkout Not Available");
         }
@@ -175,22 +167,19 @@ public class NinjaFlowTest {
     @And("user click on remove button")
     public void user_click_on_remove_button() {
 
-    	driver.get("https://tutorialsninja.com/demo/index.php?route=checkout/cart");
+        driver.get("https://tutorialsninja.com/demo/index.php?route=checkout/cart");
 
         p.RemoveButton();
 
-        System.out.println("Remove Cart Passed");
+        System.out.println("Cart Removed");
     }
 
     @And("user logout successfully")
-    public void user_logout_successfully() throws InterruptedException {
+    public void user_logout_successfully() {
 
-    	driver.get("https://tutorialsninja.com/demo/");
+        driver.get("https://tutorialsninja.com/demo/");
 
-      
-    	p.MyAccount();
-
-        Thread.sleep(2000);
+        p.MyAccount();
 
         p.Logout();
 
