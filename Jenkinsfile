@@ -4,6 +4,8 @@ pipeline {
     environment {
     JAVA_HOME = 'C:\\Program Files\\Java\\jdk-25.0.3'
     PATH = "${JAVA_HOME}\\bin;${env.PATH}"
+    Maven_Home = "C:\\apache-maven-3.9.15"
+    PATH="C:\\apache-maven-3.9.15\\bin"
 }
 
     stages {
