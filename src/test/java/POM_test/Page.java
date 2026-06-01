@@ -179,18 +179,24 @@ public class Page {
 
     public void SearchProduct(String product) {
 
-        WebDriverWait wait =
-                new WebDriverWait(driver, Duration.ofSeconds(20));
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        WebElement search =
-                wait.until(
-                        ExpectedConditions.presenceOfElementLocated(
-                                By.name("search")));
+    try {
+        WebElement search = wait.until(
+            ExpectedConditions.refreshed(
+                ExpectedConditions.visibilityOfElementLocated(By.name("search"))
+            )
+        );
 
         search.clear();
+        search.sendKeys(product);
 
+    } catch (Exception e) {
+        WebElement search = driver.findElement(By.name("search"));
+        search.clear();
         search.sendKeys(product);
     }
+}
 
     public void SearchButton() {
 

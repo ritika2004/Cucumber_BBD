@@ -47,5 +47,5 @@ Then complete ecommerce flow should execute successfully
 
 Examples:
 | firstname | lastname | email                | telephone | password | confirmPassword | productname |
-| Ritika    | Agrawal  | ritika159@gmail.com  | 9876543210 | Test@123 | Test@123 | iPhone |
-| Yashi     | Agrawal  | yashi951@gmail.com   | 9876501234 | yashi@12 | yashi@12 | iPhone |
+| Ritika    | Agrawal  | ritika951@gmail.com  | 9876543210 | Test@123 | Test@123 | iPhone |
+| Yashi     | Agrawal  | yashi159@gmail.com   | 9876501234 | yashi@12 | yashi@12 | iPhone |
