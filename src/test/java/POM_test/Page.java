@@ -7,6 +7,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.TimeoutException;
 
 public class Page {
 
@@ -66,14 +69,33 @@ public class Page {
 
     public void MyAccount() {
 
-    	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
-        WebElement myAcc = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(
-                        By.xpath("//span[contains(text(),'My Account')]")));
+        try {
 
-        myAcc.click();
-        System.out.println("My Account Clicked");
+            WebElement myAcc = wait.until(
+                    ExpectedConditions.elementToBeClickable(
+                            By.xpath("//a[@title='My Account']")));
+
+            ((JavascriptExecutor) driver)
+                    .executeScript("arguments[0].scrollIntoView(true);", myAcc);
+
+            Thread.sleep(1000);
+
+            myAcc.click();
+
+            System.out.println("My Account Clicked");
+
+        } catch (Exception e) {
+
+            WebElement myAcc = driver.findElement(
+                    By.xpath("//a[@title='My Account']"));
+
+            ((JavascriptExecutor) driver)
+                    .executeScript("arguments[0].click();", myAcc);
+
+            System.out.println("My Account Clicked Using JS");
+        }
     }
 
     public void Register() {
