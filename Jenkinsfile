@@ -1,10 +1,10 @@
 pipeline {
     agent any
 
-    tools {
-        maven 'Maven3'
-        jdk 'jdk25'
-    }
+    environment {
+    JAVA_HOME = 'C:\\Program Files\\Java\\jdk-25.0.3'
+    PATH = "${JAVA_HOME}\\bin;${env.PATH}"
+}
 
     stages {
 
