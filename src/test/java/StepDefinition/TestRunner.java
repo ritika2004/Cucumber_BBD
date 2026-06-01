@@ -11,7 +11,7 @@ import io.cucumber.junit.CucumberOptions;
 
 @CucumberOptions (features="src/test/resources/features",
 glue= {"StepDefinition","Hooks"},
-tags="@Regression",
+tags="@Smoke",
 plugin= {"pretty","html:target/htmlreports/report1.html","json:target/jsonreport/report","junit:target/junitreport/report"}
 )
 public class TestRunner {
