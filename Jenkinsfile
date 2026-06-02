@@ -2,11 +2,10 @@ pipeline {
     agent any
 
     environment {
-    JAVA_HOME = 'C:\\Program Files\\Java\\jdk-25.0.3'
-    MAVEN_HOME = 'C:\\apache-maven-3.9.15'
-
-    PATH = "${JAVA_HOME}\\bin;${MAVEN_HOME}\\bin;${env.PATH}"
-}
+        JAVA_HOME = 'C:\\Program Files\\Java\\jdk-25.0.3'
+        MAVEN_HOME = 'C:\\apache-maven-3.9.15'
+        PATH = "${JAVA_HOME}\\bin;${MAVEN_HOME}\\bin;${env.PATH}"
+    }
 
     stages {
 
@@ -38,6 +37,20 @@ pipeline {
         stage('Generate Report') {
             steps {
                 junit 'target/surefire-reports/*.xml'
+            }
+        }
+
+      
+        stage('Docker Build') {
+            steps {
+                bat 'docker build -t cucumber-framework .'
+            }
+        }
+
+        
+        stage('Docker Run') {
+            steps {
+                bat 'docker run --rm cucumber-framework'
             }
         }
     }
