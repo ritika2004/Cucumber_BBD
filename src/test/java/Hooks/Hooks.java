@@ -1,11 +1,9 @@
 package Hooks;
 
-
 import java.time.Duration;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 
@@ -16,28 +14,27 @@ public class Hooks {
     @Before
     public void setup() {
 
-    
+        ChromeOptions options = new ChromeOptions();
 
-    	    ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless=new");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--window-size=1920,1080");
 
-    	    options.addArguments("--remote-allow-origins=*");
+        driver = new ChromeDriver(options);
 
-    	    driver = new ChromeDriver(options);
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
-    	    driver.manage().window().maximize();
+        driver.get("https://tutorialsninja.com/demo/");
 
-    	    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-
-    	    driver.get("https://tutorialsninja.com/demo/");
-
-    	    System.out.println("Browser Opened");
-    	}    
+        System.out.println("Browser Opened");
+    }
 
     @After
     public void tearDown() {
 
-    	if (driver != null) {
-
+        if (driver != null) {
             driver.quit();
         }
 
