@@ -1,9 +1,11 @@
 package Hooks;
 
 import java.time.Duration;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 
@@ -16,6 +18,7 @@ public class Hooks {
 
         ChromeOptions options = new ChromeOptions();
 
+        
         options.addArguments("--headless=new");
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
@@ -23,12 +26,12 @@ public class Hooks {
 
         driver = new ChromeDriver(options);
 
-        driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().window().maximize();
 
         driver.get("https://tutorialsninja.com/demo/");
 
-        System.out.println("Browser Opened");
+        System.out.println("Browser Started in Docker/Jenkins");
     }
 
     @After
