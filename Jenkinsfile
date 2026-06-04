@@ -16,15 +16,9 @@ pipeline {
             }
         }
 
-        stage('Clean') {
+        stage('Clean Build') {
             steps {
-                bat 'mvn clean'
-            }
-        }
-
-        stage('Build') {
-            steps {
-                bat 'mvn compile'
+                bat 'mvn clean compile'
             }
         }
 
@@ -34,20 +28,18 @@ pipeline {
             }
         }
 
-        stage('Generate Report') {
+        stage('Reports') {
             steps {
-                junit 'target/surefire-reports/*.xml'
+                junit 'target/junitreport/*.xml'
             }
         }
 
-      
         stage('Docker Build') {
             steps {
                 bat 'docker build -t cucumber-framework .'
             }
         }
 
-        
         stage('Docker Run') {
             steps {
                 bat 'docker run --rm cucumber-framework'

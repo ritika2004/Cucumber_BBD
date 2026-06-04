@@ -20,10 +20,7 @@ public class PHPTravelsPage {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(30));
     }
-
-  
-
-    By email = By.xpath("//input[@type='email']");
+     By email = By.xpath("//input[@type='email']");
     By password = By.xpath("//input[@type='password']");
     By loginButton = By.xpath("//button[@type='submit']");
 

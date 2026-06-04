@@ -2,6 +2,7 @@ package Hooks;
 
 import java.time.Duration;
 
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -18,16 +19,20 @@ public class Hooks {
 
         ChromeOptions options = new ChromeOptions();
 
-        
+        // CI + Docker stable flags
         options.addArguments("--headless=new");
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--disable-gpu");
+        options.addArguments("--remote-allow-origins=*");
         options.addArguments("--window-size=1920,1080");
+
+      
 
         driver = new ChromeDriver(options);
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().window().maximize();
+        driver.manage().window().setSize(new Dimension(1920, 1080));
 
         driver.get("https://tutorialsninja.com/demo/");
 
