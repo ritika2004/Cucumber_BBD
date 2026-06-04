@@ -29,10 +29,10 @@ pipeline {
         }
 
         stage('Reports') {
-            steps {
-                junit 'target/junitreport/*.xml'
-            }
-        }
+    steps {
+        junit 'target/surefire-reports/*.xml'
+    }
+}
 
         stage('Docker Build') {
             steps {
